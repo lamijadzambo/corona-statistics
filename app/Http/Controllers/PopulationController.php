@@ -58,6 +58,6 @@ class PopulationController extends Controller
         //dd($populationData);
 
 
-        return view('index');
+        return redirect()->route('index');
     }
 }
