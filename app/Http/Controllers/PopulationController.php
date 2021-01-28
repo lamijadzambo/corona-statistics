@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Deaths;
 use App\Models\Population;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class PopulationController extends Controller
 {
-    public function index(){
-        $population = Population::all();
-        return view('index', compact('population'));
-
-    }
-
 
     public function show(){
         return view('upload');
@@ -21,11 +16,11 @@ class PopulationController extends Controller
 
 
     public function store(Request $request){
-        //Population::getPopulationData($request);
 
-        $upload = $request->file('upload-file');
+        $upload = $request->file('upload-population');
         $filePath = $upload->getRealPath();
         $file = fopen($filePath, 'r');
+        //$upload->store(public_path('/csvFiles')); // move to the public folder!!!!
         $header = fgetcsv($file);
         $escapedHeader = [];
 
@@ -39,24 +34,20 @@ class PopulationController extends Controller
             $data = array_combine($escapedHeader, $columns);
 
             $population = new Population();
-            $population->region = $data['region'];
-            $population->population_january = $data['populationjanuary'];
-            $population->live_births = $data['livebirths'];
-            $population->deaths = $data['deaths'];
-            $population->birth_rate = $data['birthrate'];
-            $population->immigration = $data['immigration'];
-            $population->emigration = $data['emigration'];
-            $population->migration_balance = $data['migrationbalance'];
-            $population->population_december = $data['populationdecember'];
-            $population->absolut = $data['absolut'];
-            $population->percent = $data['percent'];
-
+            $population->canton = $data['canton'];
+            $population->person1 = $data['person1'];
+            $population->person2 = $data['person2'];
+            $population->person3 = $data['person3'];
+            $population->person4 = $data['person4'];
+            $population->person5 = $data['person5'];
+            $population->six_or_more_person = $data['sixormoreperson'];
+            $population->implausible_household = $data['implausiblehouseholds'];
+            $population->year = $data['year'];
              $population->save();
            // $populationData[] = $population;
         }
 
         //dd($populationData);
-
 
         return redirect()->route('index');
     }

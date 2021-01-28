@@ -4,16 +4,15 @@ namespace App\Classes;
 
 class Population
 {
-    public $region;
-    public $populationJanuary;
-    public $liveBirths;
-    public $deaths;
-    public $birthRate;
-    public $immigration;
-    public $emigration;
-    public $migrationBalance;
-    public $populationDecember;
-    public $absolut;
-    public $percent;
+    public $canton;
+    public $total;
+    public $person1;
+    public $person2;
+    public $person3;
+    public $person4;
+    public $person5;
+    public $sixOrMorePerson;
+    public $implausibleHouseholds;
+
 }
 

@@ -11,7 +11,12 @@
 
     <h1>Corona Statistics</h1>
 @foreach($population as $item)
-    <span>{{$item->region}}</span>
+    <span>{{$item->person1}}</span>
 @endforeach
+
+    <h1>Deaths Statistics</h1>
+    @foreach($deaths as $item)
+        <span>{{$item->total2020}}</span>
+    @endforeach
 </body>
 </html>
