@@ -14,8 +14,7 @@ class CreatePopulationsTable extends Migration
     public function up()
     {
         Schema::create('populations', function (Blueprint $table) {
-            $table->id();
-            $table->string('canton')->unique();
+            $table->string('id')->unique();
             $table->string('person1')->nullable();
             $table->string('person2')->nullable();
             $table->string('person3')->nullable();
@@ -23,7 +22,6 @@ class CreatePopulationsTable extends Migration
             $table->string('person5')->nullable();
             $table->string('six_or_more_person')->nullable();
             $table->string('implausible_household')->nullable();
-
             $table->timestamps();
         });
     }

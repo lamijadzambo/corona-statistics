@@ -8,9 +8,9 @@ class Population
 {
 
     public static function getPopulationData($populationFile){
+
         $filePath = $populationFile->getRealPath();
         $file = fopen($filePath, 'r');
-        //$upload->store(public_path('/csvFiles')); // move to the public folder!!!!
         $header = fgetcsv($file);
         $escapedHeader = [];
 
@@ -26,13 +26,17 @@ class Population
             $population = new \App\Models\Population();
 
             $population->upsert(
-                ['canton' => $data['canton'], 'person1' => $data['person1'], 'person2' => $data['person2'],
+                ['id' => $data['canton'], 'person1' => $data['person1'], 'person2' => $data['person2'],
                     'person3' => $data['person3'], 'person4' => $data['person4'], 'person5' => $data['person5'],
                     'six_or_more_person' => $data['sixormoreperson'], 'implausible_household' => $data['implausiblehouseholds']],
-                'canton',
+                'id',
                 ['person1', 'person2', 'person3', 'person4', 'person5', 'six_or_more_person', 'implausible_household', 'updated_at']
             );
         }
+
+        $fileForAppArchive = $populationFile;
+        $fileName = $fileForAppArchive->getClientOriginalName();
+        $fileForAppArchive->move('csvUploads', time() . $fileName);
 
     }
 
