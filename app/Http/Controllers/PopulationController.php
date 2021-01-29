@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Deaths;
 use App\Models\Population;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -17,7 +16,16 @@ class PopulationController extends Controller
 
     public function store(Request $request){
 
-        $upload = $request->file('upload-population');
+        $messages = [
+            'required' => 'Add your .csv file',
+            'mimes' => 'Only .csv files allowed'
+        ];
+
+        $request->validate(
+            ['population-file' => 'required|mimes:csv,txt'], $messages
+        );
+
+        $upload = $request->file('population-file');
         $filePath = $upload->getRealPath();
         $file = fopen($filePath, 'r');
         //$upload->store(public_path('/csvFiles')); // move to the public folder!!!!
@@ -34,21 +42,17 @@ class PopulationController extends Controller
             $data = array_combine($escapedHeader, $columns);
 
             $population = new Population();
-            $population->canton = $data['canton'];
-            $population->person1 = $data['person1'];
-            $population->person2 = $data['person2'];
-            $population->person3 = $data['person3'];
-            $population->person4 = $data['person4'];
-            $population->person5 = $data['person5'];
-            $population->six_or_more_person = $data['sixormoreperson'];
-            $population->implausible_household = $data['implausiblehouseholds'];
-            $population->year = $data['year'];
-             $population->save();
-           // $populationData[] = $population;
-        }
 
-        //dd($populationData);
+            $population->upsert(
+                ['canton' => $data['canton'], 'person1' => $data['person1'], 'person2' => $data['person2'],
+                'person3' => $data['person3'], 'person4' => $data['person4'], 'person5' => $data['person5'],
+                'six_or_more_person' => $data['sixormoreperson'], 'implausible_household' => $data['implausiblehouseholds']],
+                'canton',
+                ['person1', 'person2', 'person3', 'person4', 'person5', 'six_or_more_person', 'implausible_household', 'updated_at']
+            );
+        }
 
         return redirect()->route('index');
     }
+
 }

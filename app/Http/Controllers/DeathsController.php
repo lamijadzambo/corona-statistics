@@ -14,7 +14,17 @@ class DeathsController extends Controller
     }
 
     public function store(Request $request){
-        $upload = $request->file('upload-deaths');
+
+        $messages = [
+            'required' => 'Add your .csv file',
+            'mimes' => 'Only .csv files allowed'
+        ];
+
+        $request->validate(
+            ['death-rate-file' => 'required|mimes:csv'], $messages
+        );
+
+        $upload = $request->file('death-rate-file');
         $filePath = $upload->getRealPath();
         $file = fopen($filePath, 'r');
         //$upload->store(public_path('/csvFiles')); // move to the public folder!!!!
