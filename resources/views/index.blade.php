@@ -15,8 +15,11 @@
 @endforeach
 
     <h1>Deaths Statistics</h1>
-    @foreach($deaths[0] as $item)
-        <span>{{$item}}</span>
-    @endforeach
+
+    {{$deathRate['total2020']}}
+    <br>
+    <br>
+    {{$deathRate['total2019']}}
+
 </body>
 </html>
