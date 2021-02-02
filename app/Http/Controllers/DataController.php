@@ -23,19 +23,8 @@ class DataController extends Controller
     }
 
 
-    public function getStudents(Request $request)
-    {
-        if ($request->ajax()) {
-            $populationData = Population::latest()->get();
-            return Datatables::of($populationData)
-                ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
+    public function show(){
+        return view('guidelines');
     }
 
 }
