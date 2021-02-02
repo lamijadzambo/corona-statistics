@@ -26,10 +26,17 @@ class Population
             $population = new \App\Models\Population();
 
             $population->upsert(
-                ['id' => $data['canton'], 'person1' => $data['person1'], 'person2' => $data['person2'],
-                    'person3' => $data['person3'], 'person4' => $data['person4'], 'person5' => $data['person5'],
-                    'six_or_more_person' => $data['sixormoreperson'], 'implausible_household' => $data['implausiblehouseholds']],
-                'id',
+                [
+                    'canton' => $data['canton'],
+                    'person1' => $data['person1'],
+                    'person2' => $data['person2'],
+                    'person3' => $data['person3'],
+                    'person4' => $data['person4'],
+                    'person5' => $data['person5'],
+                    'six_or_more_person' => $data['sixormoreperson'],
+                    'implausible_household' => $data['implausiblehouseholds']
+                ],
+                'canton',
                 ['person1', 'person2', 'person3', 'person4', 'person5', 'six_or_more_person', 'implausible_household', 'updated_at']
             );
         }
