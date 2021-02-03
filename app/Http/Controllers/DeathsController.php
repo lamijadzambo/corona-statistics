@@ -2,32 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Population;
+use App\Services\DeathRate;
 use Illuminate\Http\Request;
 
-
-class PopulationController extends Controller
+class DeathsController extends Controller
 {
-    public function show(){
-        return view('upload');
-    }
-
-
     public function store(Request $request){
-
         $messages = [
             'required' => 'Add your .csv file',
             'mimes' => 'Only .csv files allowed'
         ];
 
         $request->validate(
-            ['population-file' => 'required|mimes:csv,txt'], $messages
+            ['death-rate-file' => 'required|mimes:csv,txt'], $messages
         );
 
-        $populationFile = $request->file('population-file');
-        Population::getPopulationData($populationFile);
+        $deathRateFile = $request->file('death-rate-file');
+        DeathRate::getDeathRateData($deathRateFile);
 
         return redirect()->route('index');
     }
-
 }
