@@ -39,7 +39,7 @@
                     <tbody>
                     @foreach($population as $item)
                         <tr>
-                            <td>{{ $item->canton }}</td>
+                            <td>{{ preg_replace('/[^a-z A-Z]/', '', $item->canton) }}</td>
                             <td>Total</td>
                             <td>{{ $item->person1 }}</td>
                             <td>{{ $item->person2 }}</td>
