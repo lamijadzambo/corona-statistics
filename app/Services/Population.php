@@ -28,6 +28,7 @@ class Population
             $population->upsert(
                 [
                     'canton' => $data['canton'],
+                    'total' => $data['total'],
                     'person1' => $data['person1'],
                     'person2' => $data['person2'],
                     'person3' => $data['person3'],
@@ -37,7 +38,7 @@ class Population
                     'implausible_household' => $data['implausiblehouseholds']
                 ],
                 'canton',
-                ['person1', 'person2', 'person3', 'person4', 'person5', 'six_or_more_person', 'implausible_household', 'updated_at']
+                ['total', 'person1', 'person2', 'person3', 'person4', 'person5', 'six_or_more_person', 'implausible_household', 'updated_at']
             );
         }
 
