@@ -14,8 +14,13 @@ class CreatePopulationsTable extends Migration
     public function up()
     {
         Schema::create('populations', function (Blueprint $table) {
+<<<<<<< HEAD
             $table->integer('id')->autoIncrement();
             $table->string('canton')->unique();
+            $table->string('total')->nullable();
+=======
+            $table->string('id')->unique();
+>>>>>>> bd9c3db... Merging feature branch
             $table->string('person1')->nullable();
             $table->string('person2')->nullable();
             $table->string('person3')->nullable();
