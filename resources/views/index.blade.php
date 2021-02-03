@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row p-5">
+    <div class="row">
         <div class="col-12">
-            <div class="population-widget">
+            <div class="widget population-widget">
                 <table id="population" class="table table-bordered align-middle w-100">
                     <thead>
                     <tr>
@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-    <div class="row mt-5 p-5">
+    <div class="row mt-5">
         <div class="col-sm-6">
             <div class="widget bg-white">
                 <div class="d-flex total-deaths-by-year justify-content-between align-items-center">

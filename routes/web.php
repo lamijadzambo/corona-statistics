@@ -14,9 +14,8 @@ Route::post('/upload/population', [PopulationController::class, 'store'])->name(
 
 Route::post('/upload/deaths', [DeathsController::class, 'store'])->name('store-deaths-data');
 
-<<<<<<< HEAD
+
 
 Auth::routes(['register' => false]);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-=======
->>>>>>> bd9c3db... Merging feature branch
