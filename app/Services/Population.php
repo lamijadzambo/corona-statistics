@@ -45,7 +45,6 @@ class Population
         $fileForAppArchive = $populationFile;
         $fileName = $fileForAppArchive->getClientOriginalName();
         $fileForAppArchive->move('csvUploads', time() . $fileName);
-
     }
 
 }
