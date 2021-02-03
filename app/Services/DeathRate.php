@@ -17,7 +17,7 @@ class DeathRate
 
         foreach($header as $key => $value){
             $lheader = Str::lower($value);
-            $escaped_item = preg_replace('/[^a-z 0-9]/', '', $lheader);
+            $escaped_item = preg_replace('/[^a-z 0-9]/', '', trim($lheader));
             array_push($escapedHeader, $escaped_item);
         }
 
