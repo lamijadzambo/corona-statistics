@@ -17,5 +17,4 @@ Route::post('/upload/deaths', [DeathsController::class, 'store'])->name('store-d
 
 
 Auth::routes(['register' => false]);
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

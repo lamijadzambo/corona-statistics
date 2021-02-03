@@ -26,7 +26,6 @@ class Population
             $population = new \App\Models\Population();
 
             $population->upsert(
-<<<<<<< HEAD
                 [
                     'canton' => $data['canton'],
                     'total' => $data['total'],
@@ -40,20 +39,12 @@ class Population
                 ],
                 'canton',
                 ['total', 'person1', 'person2', 'person3', 'person4', 'person5', 'six_or_more_person', 'implausible_household', 'updated_at']
-=======
-                ['id' => $data['canton'], 'person1' => $data['person1'], 'person2' => $data['person2'],
-                    'person3' => $data['person3'], 'person4' => $data['person4'], 'person5' => $data['person5'],
-                    'six_or_more_person' => $data['sixormoreperson'], 'implausible_household' => $data['implausiblehouseholds']],
-                'id',
-                ['person1', 'person2', 'person3', 'person4', 'person5', 'six_or_more_person', 'implausible_household', 'updated_at']
->>>>>>> bd9c3db... Merging feature branch
             );
         }
 
         $fileForAppArchive = $populationFile;
         $fileName = $fileForAppArchive->getClientOriginalName();
         $fileForAppArchive->move('csvUploads', time() . $fileName);
-
     }
 
 }
