@@ -1,5 +1,29 @@
+/* General */
+.display-4 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
 .widget {
-    padding: 20px;
+    padding: 40px;
     border-radius: 8px;
     background-color: #ffffff;
+}
+
+.deaths-by-age {
+    margin-top: 15px;
+}
+
+.custom-margin {
+    margin-top: 100px;
+}
+
+@media only screen and (max-width: 768px) {
+    .p-5 {
+        padding: 1rem !important;
+    }
+    .mobile-invisible {
+        display: none;
+    }
 }
