@@ -12,9 +12,10 @@ class DataController extends Controller
         $deaths = DB::table('death_rate_sums')->get(); //This is a SUM of columns of deaths table fetched as db view
 
         $deathRate = [];
-
+        $values = [];
         foreach ($deaths[0] as $key => $value){
-            $deathRate += [$key => $value];
+            $values += [$value];
+            $deathRate += [$key => number_format($value)];
         }
 
         return view('index', compact('population', 'deathRate'));

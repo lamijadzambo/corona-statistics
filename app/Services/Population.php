@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 
 class Population
 {
-
     public static function getPopulationData($populationFile){
 
         $filePath = $populationFile->getRealPath();
@@ -16,7 +15,7 @@ class Population
 
         foreach($header as $key => $value){
             $lheader = Str::lower($value);
-            $escaped_item = preg_replace('/[^a-z 0-9]/', '', $lheader);
+            $escaped_item = preg_replace('/[^a-z 0-9]/', '', trim($lheader));
             array_push($escapedHeader, $escaped_item);
         }
 
@@ -27,15 +26,15 @@ class Population
 
             $population->upsert(
                 [
-                    'canton' => $data['canton'],
-                    'total' => $data['total'],
-                    'person1' => $data['person1'],
-                    'person2' => $data['person2'],
-                    'person3' => $data['person3'],
-                    'person4' => $data['person4'],
-                    'person5' => $data['person5'],
-                    'six_or_more_person' => $data['sixormoreperson'],
-                    'implausible_household' => $data['implausiblehouseholds']
+                    'canton' => trim($data['canton']),
+                    'total' => trim($data['total']),
+                    'person1' => trim($data['person1']),
+                    'person2' => trim($data['person2']),
+                    'person3' => trim($data['person3']),
+                    'person4' => trim($data['person4']),
+                    'person5' => trim($data['person5']),
+                    'six_or_more_person' => trim($data['sixormoreperson']),
+                    'implausible_household' => trim($data['implausiblehouseholds'])
                 ],
                 'canton',
                 ['total', 'person1', 'person2', 'person3', 'person4', 'person5', 'six_or_more_person', 'implausible_household', 'updated_at']
