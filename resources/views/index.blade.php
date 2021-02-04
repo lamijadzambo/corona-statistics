@@ -67,7 +67,7 @@
             <div class="widget bg-white">
                 <div class="d-flex total-deaths-by-year justify-content-between align-items-center">
                     <div class="highlighted-text display-4">Total 2020</div>
-                    <div class="highlighted-total display-4">{{ number_format($deathRate['total2020'], 2) }}</div>
+                    <div class="highlighted-total display-4">{{ $deathRate['total2020'] }}</div>
                 </div>
                 <hr>
                 <div class="row">
@@ -99,7 +99,7 @@
             <div class="widget bg-white">
                 <div class="d-flex total-deaths-by-year justify-content-between align-items-center">
                     <div class="highlighted-text display-4">Total 2019</div>
-                    <div class="highlighted-total display-4">{{ number_format($deathRate['total2019'], 2) }}</div>
+                    <div class="highlighted-total display-4">{{ $deathRate['total2019'] }}</div>
                 </div>
                 <hr>
                 <div class="row">
@@ -134,7 +134,7 @@
             <div class="widget bg-white">
                 <div class="d-flex total-deaths-by-year justify-content-between align-items-center">
                     <div class="highlighted-text display-4">Total 2018</div>
-                    <div class="highlighted-total display-4">{{ number_format($deathRate['total2018'], 2) }}</div>
+                    <div class="highlighted-total display-4">{{ $deathRate['total2018'] }}</div>
                 </div>
                 <hr>
                 <div class="row">
@@ -166,7 +166,7 @@
             <div class="widget bg-white">
                 <div class="d-flex total-deaths-by-year justify-content-between align-items-center">
                     <div class="highlighted-text display-4">Total 2017</div>
-                    <div class="highlighted-total display-4">{{ number_format($deathRate['total2017'], 2) }}</div>
+                    <div class="highlighted-total display-4">{{ $deathRate['total2017'] }}</div>
                 </div>
                 <hr>
                 <div class="row">
@@ -201,7 +201,7 @@
             <div class="widget bg-white">
                 <div class="d-flex total-deaths-by-year justify-content-between align-items-center">
                     <div class="highlighted-text display-4">Total 2016</div>
-                    <div class="highlighted-total display-4">{{ number_format($deathRate['total2016'], 2) }}</div>
+                    <div class="highlighted-total display-4">{{ $deathRate['total2016'] }}</div>
                 </div>
                 <hr>
                 <div class="row">
@@ -233,7 +233,7 @@
             <div class="widget bg-white">
                 <div class="d-flex total-deaths-by-year justify-content-between align-items-center">
                     <div class="highlighted-text display-4">Total 2015</div>
-                    <div class="highlighted-total display-4">{{ number_format($deathRate['total2015'], 2) }}</div>
+                    <div class="highlighted-total display-4">{{ $deathRate['total2015'] }}</div>
                 </div>
                 <hr>
                 <div class="row">
