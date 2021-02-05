@@ -13,13 +13,16 @@ class DeathRate
         $file = fopen($filePath, 'r');
 
         $header = fgetcsv($file);
+
         $escapedHeader = [];
 
         foreach($header as $key => $value){
             $lheader = Str::lower($value);
-            $escaped_item = preg_replace('/[^a-z 0-9]/', '', trim($lheader));
+            $escaped_item = preg_replace('/[^a-zA-Z 0-9]/', '', trim($lheader));
             array_push($escapedHeader, $escaped_item);
         }
+
+        //dd($escapedHeader);
 
         while ($columns = fgetcsv($file)){
 
@@ -28,6 +31,7 @@ class DeathRate
             }
             $formattedCsvData = preg_replace('/\D/', '', $columns);
             $data = array_combine($escapedHeader, $formattedCsvData);
+
 
             $deaths = new Deaths();
             $deaths->upsert(
@@ -53,7 +57,7 @@ class DeathRate
                     'AGE65_79_2016' => (int)$data['65792016'], 'AGE65_79_2015' => (int)$data['65792015'],
 
                     'AGE80_2020' => (int)$data['802020'], 'AGE80_2019' => (int)$data['802019'],
-                    'AGE80_2018' => (int)$data['802020'], 'AGE80_2017' => (int)$data['802017'],
+                    'AGE80_2018' => (int)$data['802018'], 'AGE80_2017' => (int)$data['802017'],
                     'AGE80_2016' => (int)$data['802016'], 'AGE80_2015' => (int)$data['802015'],
                 ],
                 'id', // unique DB key

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\DeathRate;
 use Illuminate\Http\Request;
 
-class DeathsController extends Controller
+class DeathRateController extends Controller
 {
     public function store(Request $request){
         $messages = [
