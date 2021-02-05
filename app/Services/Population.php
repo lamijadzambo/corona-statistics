@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 
 class Population
 {
-
     public static function getPopulationData($populationFile){
 
         $filePath = $populationFile->getRealPath();
