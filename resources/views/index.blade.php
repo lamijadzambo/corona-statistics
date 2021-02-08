@@ -8,12 +8,13 @@
     </div>
     <div class="mt-5">
         <div class="col-sm-12 p-0">
-            <button class="btn btn-primary" id="2020">2020</button>
-            <button class="btn btn-primary" id="2019">2019</button>
-            <button class="btn btn-primary" id="2018">2018</button>
-            <button class="btn btn-primary" id="2017">2017</button>
-            <button class="btn btn-primary" id="2016">2016</button>
-            <button class="btn btn-primary" id="2015">2015</button>
+            <div class="buttons-year">
+                <button class="btn btn-primary" id="2019">2019</button>
+                <button class="btn btn-primary" id="2018">2018</button>
+                <button class="btn btn-primary" id="2017">2017</button>
+                <button class="btn btn-primary" id="2016">2016</button>
+                <button class="btn btn-primary" id="2015">2015</button>
+            </div>
         </div>
     </div>
     <div class="row mt-4">
@@ -21,35 +22,35 @@
             <div class="widget population-widget">
                 <table id="population" class="table table-bordered align-middle w-100">
                     <thead>
-                    <tr>
-                        <th rowspan="2" class="align-middle">Kanton</th>
-                        <th rowspan="2" class="align-middle">Total</th>
-                        <th rowspan="1" colspan="6" class="text-center mobile-invisible">Anzahl Personen in Haushalten mit</th>
-                        <th rowspan="2" class="align-middle">Anteil der <br> Personen in unplausiblen <br> Haushalten (in %)<sup>1</sup> </th>
-                    </tr>
-                    <tr>
-                        <th>1 Person</th>
-                        <th>2 Personen</th>
-                        <th>3 Personen</th>
-                        <th>4 Personen</th>
-                        <th>5 Personen</th>
-                        <th>6 oder mehr Personen</th>
-                    </tr>
+                        <tr>
+                            <th rowspan="2" class="align-middle">Kanton</th>
+                            <th rowspan="2" class="align-middle">Total</th>
+                            <th rowspan="1" colspan="6" class="text-center mobile-invisible">Anzahl Personen in Haushalten mit</th>
+                            <th rowspan="2" class="align-middle">Anteil der <br> Personen in unplausiblen <br> Haushalten (in %)<sup>1</sup> </th>
+                        </tr>
+                        <tr>
+                            <th>1 Person</th>
+                            <th>2 Personen</th>
+                            <th>3 Personen</th>
+                            <th>4 Personen</th>
+                            <th>5 Personen</th>
+                            <th>6 oder mehr Personen</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach($population as $item)
-                        <tr>
-                            <td>{{ preg_replace('/[^a-z A-Z]/', '', $item->canton) }}</td>
-                            <td>Total</td>
-                            <td>{{ $item->person1 }}</td>
-                            <td>{{ $item->person2 }}</td>
-                            <td>{{ $item->person3 }}</td>
-                            <td>{{ $item->person4 }}</td>
-                            <td>{{ $item->person5 }}</td>
-                            <td>{{ $item->six_or_more_person }}</td>
-                            <td>{{ $item->implausible_household }}</td>
-                        </tr>
-                    @endforeach
+{{--                        @foreach($population as $item)--}}
+{{--                            <tr>--}}
+{{--                                <td>{{ preg_replace('/[^a-z A-Z]/', '', $item->canton) }}</td>--}}
+{{--                                <td>{{ $item->total }}</td>--}}
+{{--                                <td>{{ $item->person1 }}</td>--}}
+{{--                                <td>{{ $item->person2 }}</td>--}}
+{{--                                <td>{{ $item->person3 }}</td>--}}
+{{--                                <td>{{ $item->person4 }}</td>--}}
+{{--                                <td>{{ $item->person5 }}</td>--}}
+{{--                                <td>{{ $item->six_or_more_person }}</td>--}}
+{{--                                <td>{{ $item->implausible_household }}</td>--}}
+{{--                            </tr>--}}
+{{--                        @endforeach--}}
                     </tbody>
                 </table>
             </div>
@@ -267,9 +268,39 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+
             $('#population').DataTable({
                 "pageLength" : 50,
-                responsive: true
+                responsive: true,
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '{{ route('get-population-by-year') }}',
+                    type: 'GET',
+                    dataSrc: '',
+                    data: {
+                        'year': '2015'
+                    },
+                    columns: [
+                        { data: 'canton' },
+                        { data: 'total' },
+                        { data: 'person1' },
+                        { data: 'person2' },
+                        { data: 'person3' },
+                        { data: 'person4' },
+                        { data: 'person5' },
+                        { data: 'six_or_more_person' },
+                        { data: 'implausible_household' },
+                    ],
+                    // success: function (data) {
+                    //     console.log(data);
+                    // }
+                },
             });
         } );
     </script>
