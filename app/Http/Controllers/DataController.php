@@ -31,7 +31,5 @@ class DataController extends Controller
 
             return response()->json($population);
         }
-
-        return view('index');
     }
 }

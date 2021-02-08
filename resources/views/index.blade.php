@@ -37,21 +37,7 @@
                             <th>6 oder mehr Personen</th>
                         </tr>
                     </thead>
-                    <tbody>
-{{--                        @foreach($population as $item)--}}
-{{--                            <tr>--}}
-{{--                                <td>{{ preg_replace('/[^a-z A-Z]/', '', $item->canton) }}</td>--}}
-{{--                                <td>{{ $item->total }}</td>--}}
-{{--                                <td>{{ $item->person1 }}</td>--}}
-{{--                                <td>{{ $item->person2 }}</td>--}}
-{{--                                <td>{{ $item->person3 }}</td>--}}
-{{--                                <td>{{ $item->person4 }}</td>--}}
-{{--                                <td>{{ $item->person5 }}</td>--}}
-{{--                                <td>{{ $item->six_or_more_person }}</td>--}}
-{{--                                <td>{{ $item->implausible_household }}</td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
@@ -275,7 +261,7 @@
             })
 
             $('#population').DataTable({
-                "pageLength" : 50,
+                pageLength : 50,
                 responsive: true,
                 processing: true,
                 serverSide: true,
