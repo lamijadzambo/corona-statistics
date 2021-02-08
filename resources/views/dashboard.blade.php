@@ -3,6 +3,7 @@
 @section('content')
     <head>
         <link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
+        <title>Corona-Zahlen</title>
     </head>
 
     <div class="container-fluid">
@@ -74,7 +75,6 @@
         </nav>
 
         <div class="col-md-9 ml-sm-auto col-lg-10">
-
             <div class="row">
                 <div class="container mt-3">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -109,9 +109,7 @@
                                 </div>
                             </form>
                         </div>
-
                     </div>
-
                 </div>
             </div>
 
