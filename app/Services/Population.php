@@ -3,28 +3,27 @@
 namespace App\Services;
 
 use Illuminate\Support\Str;
-
+use App\Models\Population as PopulationModel;
 class Population
 {
     public static function getPopulationData($populationFile){
 
         $filePath = $populationFile->getRealPath();
         $file = fopen($filePath, 'r');
-        $header = fgetcsv($file);
-        $escapedHeader = [];
+        $csvFile = fgetcsv($file);
 
-        foreach($header as $key => $value){
-            $lheader = Str::lower($value);
-            $escaped_item = preg_replace('/[^a-z 0-9]/', '', trim($lheader));
-            array_push($escapedHeader, $escaped_item);
+        $csvFile = array_map('strtolower', $csvFile);
+        $csvFile = array_map('trim', $csvFile);
+
+        $csvFileHeaderDiff = array_diff(array_filter($csvFile), PopulationModel::$tableColumns);
+
+        if (!empty($csvFileHeaderDiff)){
+            return false;
         }
 
-        while ($columns = fgetcsv($file)){
-            $data = array_combine($escapedHeader, $columns);
-
-            $population = new \App\Models\Population();
-
-            $population->upsert(
+        while ($fileColumns = fgetcsv($file)){
+            $data = array_combine($csvFile, $fileColumns);
+            PopulationModel::upsert(
                 [
                     'canton' => trim($data['canton']),
                     'total' => trim($data['total']),
@@ -44,6 +43,8 @@ class Population
         $fileForAppArchive = $populationFile;
         $fileName = $fileForAppArchive->getClientOriginalName();
         $fileForAppArchive->move('csvUploads', time() . $fileName);
+
+        return true;
     }
 
 }

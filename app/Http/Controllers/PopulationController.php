@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PopulationController extends Controller
 {
     public function show(){
-        return view('upload');
+        return view('dashboard');
     }
 
 
@@ -25,9 +25,16 @@ class PopulationController extends Controller
         );
 
         $populationFile = $request->file('population-file');
-        Population::getPopulationData($populationFile);
+        $population = Population::getPopulationData($populationFile);
 
-        return redirect()->route('index');
+        if($population){
+            return redirect()->route('index');
+        }else{
+            $request->session()->flash('population-file', 'Your document is not formatted properly.');
+            return redirect()->back();
+        }
+
+
     }
 
 }
