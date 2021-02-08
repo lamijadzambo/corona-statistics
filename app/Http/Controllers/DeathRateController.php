@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\DeathRate;
 use Illuminate\Http\Request;
 
-class DeathsController extends Controller
+class DeathRateController extends Controller
 {
     public function store(Request $request){
         $messages = [
@@ -18,8 +18,13 @@ class DeathsController extends Controller
         );
 
         $deathRateFile = $request->file('death-rate-file');
-        DeathRate::getDeathRateData($deathRateFile);
+        $deathRate = DeathRate::getDeathRateData($deathRateFile);
 
-        return redirect()->route('index');
+        if($deathRate){
+            return redirect()->route('index');
+        }else{
+            $request->session()->flash('death-rate-file', 'Your document is not formatted properly.');
+            return redirect()->back();
+        }
     }
 }
