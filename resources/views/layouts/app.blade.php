@@ -43,7 +43,7 @@
             <div class="container-fluid px-5">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/theme/covid-icon-logo-red.png') }}" alt="Logo" width="50">
-                    <span class="d-inline-block ml-2 h4">Schweizer Koronastatistik</span>
+                    <span class="d-inline-block ml-2 h4">Schweizer Coronastatistik</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
