@@ -4,9 +4,11 @@
     <div class="row">
         <div class="col-sm-12">
             <h1>Ständige Wohnbevölkerung in Privathaushalten nach Kanton und Haushaltsgrösse</h1>
+            <hr class="my-2">
+            <h4>Wir finden diese info müsste vom bundesrat kommen !!!</h4>
         </div>
     </div>
-    <div class="composer require yajra/laravel-datatables-oraclemt-5 d-flex">
+    <div class="mt-5 d-flex">
         <div class="filters form-group">
             <label for="year">Filtern Sie die Corona-Statistiken nach Jahr:</label>
             <select name="year" id="year" class="form-control">
@@ -46,6 +48,8 @@
     <div class="row custom-margin">
         <div class="col-sm-12">
             <h1>Todesfälle nach Altersklasse und Woche, 2015-2020 (Schweiz)</h1>
+            <hr class="my-2">
+            <h4>Wir finden diese info müsste vom bundesrat kommen !!!</h4>
         </div>
     </div>
 
@@ -261,7 +265,6 @@
             })
 
             let table = $('#population').DataTable({
-                pageLength : 50,
                 responsive: true,
                 processing: true,
                 serverSide: true,
