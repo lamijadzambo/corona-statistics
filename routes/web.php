@@ -1,12 +1,10 @@
 <?php
-
 use App\Http\Controllers\DeathRateController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PopulationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 
 Route::get('/', [DataController::class, 'index'])->name('index');
 Route::get('/population', [DataController::class, 'getPopulationByYear'])->name('get-population-by-year');
@@ -19,4 +17,4 @@ Route::post('/upload/population', [PopulationController::class, 'store'])->name(
 
 Route::post('/upload/deaths', [DeathRateController::class, 'store'])->name('store-deaths-data')->middleware('auth');
 
-Auth::routes();
+Auth::routes(['register' => false]);
