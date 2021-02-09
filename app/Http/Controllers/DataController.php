@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Population;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
 
 class DataController extends Controller
 {
@@ -23,13 +24,31 @@ class DataController extends Controller
 
     public function getPopulationByYear(Request $request)
     {
-        if (request()->ajax()) {
-            $year = $request->input('year');
+        if ($request->ajax()) {
+            $data = Population::select([
+                'canton',
+                'total',
+                'person1',
+                'person2',
+                'person3',
+                'person4',
+                'person5',
+                'six_or_more_person',
+                'implausible_household'
+            ]);
 
-            $population = Population::query()->where('canton', 'LIKE', '%' . $year . '%')->get();
-            $population->makeHidden(['id', 'created_at', 'updated_at']);
-
-            return response()->json($population);
+            return DataTables::of($data)
+                    ->filter(function ($instance) use ($request) {
+                        if (!empty($request->get('year'))) {
+                            $instance->where(function ($w) use ($request){
+                                $year = $request->get('year');
+                                $w->orWhere('canton', 'LIKE', '%' . $year . '%');
+                            });
+                        }
+                    })
+                    ->make(true);
         }
+
+        return view('index');
     }
 }

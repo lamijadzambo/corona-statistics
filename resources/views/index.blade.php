@@ -6,15 +6,16 @@
             <h1>Ständige Wohnbevölkerung in Privathaushalten nach Kanton und Haushaltsgrösse</h1>
         </div>
     </div>
-    <div class="mt-5">
-        <div class="col-sm-12 p-0">
-            <div class="buttons-year">
-                <button class="btn btn-primary" id="2019">2019</button>
-                <button class="btn btn-primary" id="2018">2018</button>
-                <button class="btn btn-primary" id="2017">2017</button>
-                <button class="btn btn-primary" id="2016">2016</button>
-                <button class="btn btn-primary" id="2015">2015</button>
-            </div>
+    <div class="composer require yajra/laravel-datatables-oraclemt-5 d-flex">
+        <div class="filters form-group">
+            <label for="year">Filtern Sie die Corona-Statistiken nach Jahr:</label>
+            <select name="year" id="year" class="form-control">
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+            </select>
         </div>
     </div>
     <div class="row mt-4">
@@ -37,7 +38,6 @@
                             <th>6 oder mehr Personen</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
                 </table>
             </div>
         </div>
@@ -260,7 +260,7 @@
                 }
             })
 
-            $('#population').DataTable({
+            let table = $('#population').DataTable({
                 pageLength : 50,
                 responsive: true,
                 processing: true,
@@ -268,25 +268,25 @@
                 ajax: {
                     url: '{{ route('get-population-by-year') }}',
                     type: 'GET',
-                    dataSrc: '',
-                    data: {
-                        'year': '2015'
-                    },
-                    columns: [
-                        { data: 'canton' },
-                        { data: 'total' },
-                        { data: 'person1' },
-                        { data: 'person2' },
-                        { data: 'person3' },
-                        { data: 'person4' },
-                        { data: 'person5' },
-                        { data: 'six_or_more_person' },
-                        { data: 'implausible_household' },
-                    ],
-                    // success: function (data) {
-                    //     console.log(data);
-                    // }
+                    data: function (d) {
+                        d.year = $('#year').val();
+                    }
                 },
+                columns: [
+                    { data: 'canton' },
+                    { data: 'total' },
+                    { data: 'person1' },
+                    { data: 'person2' },
+                    { data: 'person3' },
+                    { data: 'person4' },
+                    { data: 'person5' },
+                    { data: 'six_or_more_person' },
+                    { data: 'implausible_household' },
+                ],
+            });
+
+            $('#year').change(function(){
+                table.draw();
             });
         } );
     </script>
