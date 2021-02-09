@@ -6,14 +6,16 @@
             <h1>Ständige Wohnbevölkerung in Privathaushalten nach Kanton und Haushaltsgrösse</h1>
         </div>
     </div>
-    <div class="mt-5">
-        <div class="col-sm-12 p-0">
-            <button class="btn btn-primary" id="2020">2020</button>
-            <button class="btn btn-primary" id="2019">2019</button>
-            <button class="btn btn-primary" id="2018">2018</button>
-            <button class="btn btn-primary" id="2017">2017</button>
-            <button class="btn btn-primary" id="2016">2016</button>
-            <button class="btn btn-primary" id="2015">2015</button>
+    <div class="composer require yajra/laravel-datatables-oraclemt-5 d-flex">
+        <div class="filters form-group">
+            <label for="year">Filtern Sie die Corona-Statistiken nach Jahr:</label>
+            <select name="year" id="year" class="form-control">
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+            </select>
         </div>
     </div>
     <div class="row mt-4">
@@ -21,36 +23,21 @@
             <div class="widget population-widget">
                 <table id="population" class="table table-bordered align-middle w-100">
                     <thead>
-                    <tr>
-                        <th rowspan="2" class="align-middle">Kanton</th>
-                        <th rowspan="2" class="align-middle">Total</th>
-                        <th rowspan="1" colspan="6" class="text-center mobile-invisible">Anzahl Personen in Haushalten mit</th>
-                        <th rowspan="2" class="align-middle">Anteil der <br> Personen in unplausiblen <br> Haushalten (in %)<sup>1</sup> </th>
-                    </tr>
-                    <tr>
-                        <th>1 Person</th>
-                        <th>2 Personen</th>
-                        <th>3 Personen</th>
-                        <th>4 Personen</th>
-                        <th>5 Personen</th>
-                        <th>6 oder mehr Personen</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($population as $item)
                         <tr>
-                            <td>{{ preg_replace('/[^a-z A-Z]/', '', $item->canton) }}</td>
-                            <td>Total</td>
-                            <td>{{ $item->person1 }}</td>
-                            <td>{{ $item->person2 }}</td>
-                            <td>{{ $item->person3 }}</td>
-                            <td>{{ $item->person4 }}</td>
-                            <td>{{ $item->person5 }}</td>
-                            <td>{{ $item->six_or_more_person }}</td>
-                            <td>{{ $item->implausible_household }}</td>
+                            <th rowspan="2" class="align-middle">Kanton</th>
+                            <th rowspan="2" class="align-middle">Total</th>
+                            <th rowspan="1" colspan="6" class="text-center mobile-invisible">Anzahl Personen in Haushalten mit</th>
+                            <th rowspan="2" class="align-middle">Anteil der <br> Personen in unplausiblen <br> Haushalten (in %)<sup>1</sup> </th>
                         </tr>
-                    @endforeach
-                    </tbody>
+                        <tr>
+                            <th>1 Person</th>
+                            <th>2 Personen</th>
+                            <th>3 Personen</th>
+                            <th>4 Personen</th>
+                            <th>5 Personen</th>
+                            <th>6 oder mehr Personen</th>
+                        </tr>
+                    </thead>
                 </table>
             </div>
         </div>
@@ -267,9 +254,39 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#population').DataTable({
-                "pageLength" : 50,
-                responsive: true
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+
+            let table = $('#population').DataTable({
+                pageLength : 50,
+                responsive: true,
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '{{ route('get-population-by-year') }}',
+                    type: 'GET',
+                    data: function (d) {
+                        d.year = $('#year').val();
+                    }
+                },
+                columns: [
+                    { data: 'canton' },
+                    { data: 'total' },
+                    { data: 'person1' },
+                    { data: 'person2' },
+                    { data: 'person3' },
+                    { data: 'person4' },
+                    { data: 'person5' },
+                    { data: 'six_or_more_person' },
+                    { data: 'implausible_household' },
+                ],
+            });
+
+            $('#year').change(function(){
+                table.draw();
             });
         } );
     </script>
