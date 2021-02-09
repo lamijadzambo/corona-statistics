@@ -12,9 +12,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = new User();
-        $user->name = 'DieWerber';
-        $user->email = 'info@die-werber.ch';
-        $user->password = Hash::make('4ceFsTe7CJNmGH82YbT4');
+        $user->name = 'Example';
+        $user->email = 'mail@example.com';
+        $user->password = Hash::make('secret');
         $user->save();
     }
 }
