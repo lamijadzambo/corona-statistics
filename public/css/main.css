@@ -32,7 +32,7 @@
 }
 
 .sidebar-sticky {
-    padding-top: 58px;
+    padding-top: 58px !important;
 }
 
 @media only screen and (max-width: 768px) {
