@@ -39,7 +39,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm border-color-red border-top-md">
             <div class="container-fluid px-5">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/theme/covid-icon-logo-red.png') }}" alt="Logo" width="50">
