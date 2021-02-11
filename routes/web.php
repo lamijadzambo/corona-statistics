@@ -17,4 +17,4 @@ Route::post('/upload/population', [PopulationController::class, 'store'])->name(
 
 Route::post('/upload/deaths', [DeathRateController::class, 'store'])->name('store-deaths-data')->middleware('auth');
 
-Auth::routes(['register' => false]);
+Auth::routes();

@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-sm-12">
+{{--    <div class="d-flex justify-content-between align-items-center">--}}
+{{--        <div class="section-title">--}}
+{{--            <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras luctus lectus neque</h1>--}}
+{{--            <p class="h5">Vivamus placerat dignissim tortor sed consequat. Cras metus nibh, dictum dictum diam eleifend, auctor vestibulum orci. Praesent eu erat scelerisque, vulputate dui sit amet, mollis urna.</p>--}}
+{{--        </div>--}}
+{{--        <div class="section-bg-image">--}}
+{{--            <img src="{{ asset('images/theme/boy-girl-with-swiss-flag.png') }}" alt="Boy and girl with swiss flag" class="img-fluid">--}}
+{{--        </div>--}}
+{{--    </div>--}}
+    <div class="row mt-5">
+        <div class="col-12">
             <h1>Ständige Wohnbevölkerung in Privathaushalten nach Kanton und Haushaltsgrösse</h1>
             <hr class="my-2">
             <h4>Wir finden diese info müsste vom bundesrat kommen !!!</h4>
@@ -26,7 +35,7 @@
                 <table id="population" class="table table-bordered align-middle w-100">
                     <thead>
                         <tr>
-                            <th rowspan="2" class="align-middle">Kanton</th>
+                            <th rowspan="2" class="align-middle canton">Kanton</th>
                             <th rowspan="2" class="align-middle">Total</th>
                             <th rowspan="1" colspan="6" class="text-center mobile-invisible">Anzahl Personen in Haushalten mit</th>
                             <th rowspan="2" class="align-middle">Anteil der <br> Personen in unplausiblen <br> Haushalten (in %)<sup>1</sup> </th>
@@ -275,6 +284,14 @@
                         d.year = $('#year').val();
                     }
                 },
+                columnDefs: [
+                    {
+                        targets: 'canton',
+                        render: function (data) {
+                            return data.replace($('#year').val(), "");
+                        }
+                    }
+                ],
                 columns: [
                     { data: 'canton' },
                     { data: 'total' },
