@@ -31,6 +31,10 @@
     border-top: 4px solid;
 }
 
+.sidebar-sticky {
+    padding-top: 58px;
+}
+
 @media only screen and (max-width: 768px) {
     .p-5 {
         padding: 1rem !important;
